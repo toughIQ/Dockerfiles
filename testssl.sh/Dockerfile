@@ -1,7 +1,7 @@
 FROM debian:stretch-slim as gitclone
 LABEL maintainer="toughIQ <toughiq@gmail.com>"
 
-ARG GIT_BRANCH=2.9dev
+ARG GIT_BRANCH=2.9.5
 RUN apt-get update \
     && apt-get install -y --no-install-recommends git openssl ca-certificates
     
