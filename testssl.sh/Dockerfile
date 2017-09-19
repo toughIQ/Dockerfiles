@@ -15,7 +15,6 @@ RUN apt-get update \
     && apt-get clean all \
     && rm -rf /var/lib/apt/lists/*
 
-
 COPY --from=gitclone /testssl.sh /testssl
 WORKDIR /testssl
 ENTRYPOINT ["/testssl/testssl.sh"]
