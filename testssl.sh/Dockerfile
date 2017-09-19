@@ -1,4 +1,4 @@
-FROM debian:stretch-slim as getzip
+FROM debian:stretch-slim as gitclone
 LABEL maintainer="toughIQ <toughiq@gmail.com>"
 
 RUN apt-get update \
@@ -16,6 +16,6 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 
-COPY --from=getzip /testssl.sh /testssl
+COPY --from=gitclone /testssl.sh /testssl
 WORKDIR /testssl
 ENTRYPOINT ["/testssl/testssl.sh"]
