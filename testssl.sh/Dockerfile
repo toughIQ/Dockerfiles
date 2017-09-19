@@ -1,10 +1,11 @@
 FROM debian:stretch-slim as gitclone
 LABEL maintainer="toughIQ <toughiq@gmail.com>"
 
+ARG GIT_BRANCH=2.9dev
 RUN apt-get update \
     && apt-get install -y --no-install-recommends git openssl ca-certificates
     
-RUN git clone -b 2.9dev https://github.com/drwetter/testssl.sh.git
+RUN git clone -b $GIT_BRANCH https://github.com/drwetter/testssl.sh.git
 
 ### Build actual image
 FROM debian:stretch-slim
@@ -17,4 +18,5 @@ RUN apt-get update \
 
 COPY --from=gitclone /testssl.sh /testssl
 WORKDIR /testssl
+RUN rm -rf /testssl/bin /testssl/doc
 ENTRYPOINT ["/testssl/testssl.sh"]
